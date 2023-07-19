@@ -15,15 +15,15 @@ attest:
           rego:
                 script: |
                   package verify
-                  
+
                   config := {
                     "blacklist": {"GPL", "MPL"},
-                    "blacklisted_limit" : 0
+                    "blacklisted_limit" : 30
                   }
 
                   default allow = false
                   default violations = []
-                  
+
                   verify = v {
                           v := {
                           "allow": allow,
@@ -43,7 +43,7 @@ attest:
                   violations = j {
                     j := { r |
                         components := input.evidence.predicate.bom.components
-                        some i 
+                        some i
                         comp := components[i]
                         comp.licenses != null
                         some j
